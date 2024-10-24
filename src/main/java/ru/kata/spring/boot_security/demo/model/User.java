@@ -16,25 +16,32 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
+
     @NotEmpty(message = "Name cannot be empty")
     @Column
     private String firstName;
+
     @NotEmpty
     @Column
     private String lastName;
+
     private int age;
+
     @NotEmpty
     @Email
     private String email;
+
     @NotEmpty
     private String password;
 
     private String username;
-    @ManyToMany(fetch = FetchType.LAZY)
+
+    @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
